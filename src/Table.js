@@ -4,23 +4,28 @@ import { Trash } from 'react-bootstrap-icons';
 
 const Table = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-
+  const fetchData = () => {
     axios.get('http://localhost:3002/posts')
       .then(response => {
         setData(response.data);
-        setLoading(false);
         
-
       })
       .catch(error => {
         console.error('Error fetching data:', error);
-        setLoading(false);
+        
       });
+  };
 
+  
+  useEffect(() => {
+    fetchData(); 
+    const interval = setInterval(fetchData, 1000); 
+    return () => clearInterval(interval);
   }, []);
+ 
+
+ 
   const handleDelete = (id) => {
    
     axios.delete(`http://localhost:3002/api/delete/${id}`)
