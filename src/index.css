@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.custom-form{
+  background-color: #02B7E2;
+  padding: 20px;
+}
+.btn-outline-dark{
+
+}
