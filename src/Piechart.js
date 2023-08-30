@@ -29,7 +29,6 @@ function Piechart()
     return(
         <React.Fragment>
             <div className="container-fluid mb-3">
-                <h3 className="mt-3">Welcome to Piechart </h3>
                 <Chart 
                 type="pie"
                 width={400}
