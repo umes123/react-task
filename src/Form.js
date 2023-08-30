@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function Form() {
-  const [formData, setFormData] = useState({
+  const [data, setdata] = useState({
     firstname: "",
     lastname: "",
     percentage: ""
@@ -12,8 +12,8 @@ function Form() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setdata({
+      ...data,
       [name]: value,
     });
   };
@@ -21,13 +21,17 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const validationErrors = validate(formData);
+    setdata({
+      firstname: '',
+      lastname: '',percentage:''})
+
+    const validationErrors = validate(data);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
 
       axios
-        .post("http://localhost:3002/posts", formData)
+        .post("http://localhost:3002/posts", data)
         .then((response) => {
           // Handle success
           console.log("API Response:", response.data);
@@ -69,7 +73,7 @@ function Form() {
                   placeholder="firstname"
                   id="name"
                   name="firstname"
-                  value={formData.firstname}
+                  value={data.firstname}
                   onChange={handleChange} />
                 {errors.firstname && <p className="error">{errors.firstname}</p>}
 
@@ -82,7 +86,7 @@ function Form() {
                   placeholder="lastname"
                   id="lastname"
                   name="lastname"
-                  value={formData.lastname}
+                  value={data.lastname}
                   onChange={handleChange} />
                 {errors.lastname && <p className="error">{errors.lastname}</p>}
 
@@ -95,7 +99,7 @@ function Form() {
                   placeholder="percentage"
                   type='number'
                   name="percentage"
-                  value={formData.percentage}
+                  value={data.percentage}
                   onChange={handleChange} />
                 {errors.percentage && <p className="error">{errors.percentage}</p>}
 
